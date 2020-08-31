@@ -16,28 +16,26 @@ class PickerBloc extends Bloc<PickerEvent, PickerState> {
     PickerEvent event,
   ) async* {
     // обрабатываем событие "выбор PDF-документа"
-    if (event is PickPdfDocument) {
-      try {
-        yield PickerLoading();
-        final String filePath = await FilePicker.getFilePath(
-            type: FileType.custom, allowedExtensions: ['pdf']);
-        final String fileName = path.basenameWithoutExtension(filePath);
-        yield PickerLoaded({'filePath': filePath, 'fileName': fileName});
-      } catch (_) {
-        yield PickerError('Возникла ошибка, попробуйте снова.');
-      }
-    }
-
-    // обрабатываем событие "выбор Word-документа"
-    if (event is PickDocDocument) {
-      try {
-        yield PickerLoading();
-        String filePath = await FilePicker.getFilePath(
-            type: FileType.custom, allowedExtensions: ['doc', 'docx']);
-        final String fileName = path.basenameWithoutExtension(filePath);
-        yield PickerLoaded({'filePath': filePath, 'fileName': fileName});
-      } catch (_) {
-        yield PickerError('Возникла ошибка, попробуйте снова.');
+    if (event is PickDocument) {
+      yield PickerLoading();
+      final String filePath = await FilePicker.getFilePath();
+      if (filePath != null) {
+        if (path.extension(filePath).endsWith('.doc') ||
+            path.extension(filePath).endsWith('.docx') ||
+            path.extension(filePath).endsWith('.pdf')) {
+          final String fileName = path.basenameWithoutExtension(filePath);
+          bool isPdf = path.extension(filePath).endsWith('.pdf');
+          yield PickerLoaded({
+            'filePath': filePath,
+            'fileName': fileName,
+            'isPdf': isPdf,
+          });
+        } else {
+          yield PickerError(
+              'Неверный формат. Допустимы только doc, docx, pdf форматы.');
+        }
+      } else {
+        yield PickerError('Вы ничего не выбрали!');
       }
     }
   }

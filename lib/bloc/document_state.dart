@@ -14,17 +14,17 @@ class DocumentLoading extends DocumentState {
 }
 
 class DocumentLoaded extends DocumentState {
-  const DocumentLoaded(this.document);
-  final String document;
+  const DocumentLoaded(this.data);
+  final Map data;
 
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
-    return o is DocumentLoaded && o.document == document;
+    return o is DocumentLoaded && o.data == data;
   }
 
   @override
-  int get hashCode => document.hashCode;
+  int get hashCode => data.hashCode;
 }
 
 class DocumentError extends DocumentState {

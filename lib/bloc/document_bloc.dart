@@ -13,6 +13,12 @@ class DocumentBloc extends Bloc<DocumentEvent, DocumentState> {
   Stream<DocumentState> mapEventToState(
     DocumentEvent event,
   ) async* {
-    // TODO: implement mapEventToState
+    if (event is OpenDocument) {
+      final data = {
+        'filePath': event.data['filePath'],
+        'fileName': event.data['fileName'],
+      };
+      yield DocumentLoaded(data);
+    }
   }
 }
