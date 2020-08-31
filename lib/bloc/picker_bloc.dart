@@ -1,9 +1,9 @@
 import 'dart:async';
-import 'package:path/path.dart' as path;
 
 import 'package:bloc/bloc.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:meta/meta.dart';
+import 'package:path/path.dart' as path;
 
 part 'picker_event.dart';
 part 'picker_state.dart';

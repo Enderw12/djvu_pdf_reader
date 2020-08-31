@@ -1,10 +1,11 @@
-import 'package:docx_pdf_reader/bloc/document_bloc.dart';
-import 'package:docx_pdf_reader/bloc/picker_bloc.dart';
-import 'package:docx_pdf_reader/screens/document_picker_screen.dart';
-import 'package:docx_pdf_reader/screens/document_view_screen.dart';
-import 'package:docx_pdf_reader/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'bloc/document_bloc.dart';
+import 'bloc/picker_bloc.dart';
+import 'screens/document_picker_screen.dart';
+import 'screens/document_view_screen.dart';
+import 'screens/welcome_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
         )
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
           primarySwatch: Colors.blue,

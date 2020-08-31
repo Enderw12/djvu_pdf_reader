@@ -1,8 +1,10 @@
-import 'package:docx_pdf_reader/bloc/document_bloc.dart';
-import 'package:docx_pdf_reader/bloc/picker_bloc.dart';
-import 'package:docx_pdf_reader/screens/document_view_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../bloc/document_bloc.dart';
+import '../bloc/picker_bloc.dart';
+import '../widgets/alert_dialog.dart';
+import 'document_view_screen.dart';
 
 class DocumentPickerScreen extends StatelessWidget {
   /// [DocumentPickerScreen] экран отвечает за выбор документа который нужно будет открыть.
@@ -23,8 +25,12 @@ class DocumentPickerScreen extends StatelessWidget {
       // AppBar — верхняя панель на экране приложения. Как правило содержит заголовок, элементы навигации и несколько кнопок.
       appBar: AppBar(
         title: Center(child: Text('Экран выбора документа')),
-        // todo добавить функционал
-        actions: [],
+        actions: [
+          IconButton(
+            icon: Icon(Icons.exit_to_app),
+            onPressed: () => showExitDialog(context),
+          )
+        ],
       ),
       // Container — один из базовых виджетов используемых для разметки (вертски).
       // Сам по себе невидим и ничего не делает, но позволяет структурировать содержимое на экране и влиять на его характеристики.

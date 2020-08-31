@@ -1,4 +1,5 @@
 import 'package:docx_pdf_reader/bloc/document_bloc.dart';
+import 'package:docx_pdf_reader/widgets/alert_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_filereader/flutter_filereader.dart';
@@ -13,6 +14,43 @@ class DocumentViewScreen extends StatelessWidget {
       builder: (context, state) {
         if (state is DocumentLoaded) {
           return DocumentLoadedWidget(state: state);
+        } else if (state is DocumentLoading) {
+          return Scaffold(
+            appBar: AppBar(
+              title: Text('Идёт загрузка...'),
+              actions: [
+                IconButton(
+                  icon: Icon(Icons.exit_to_app),
+                  onPressed: () => showExitDialog(context),
+                )
+              ],
+            ),
+            body: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        } else {
+          return Scaffold(
+            appBar: AppBar(
+              title: Text('Ошибка'),
+              actions: [
+                IconButton(
+                  icon: Icon(Icons.exit_to_app),
+                  onPressed: () => showExitDialog(context),
+                )
+              ],
+            ),
+            body: Center(
+              child: Text(
+                "Произошла непредвиденная ошибка!",
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.red,
+                  fontStyle: FontStyle.italic,
+                ),
+              ),
+            ),
+          );
         }
       },
     );
@@ -31,6 +69,12 @@ class DocumentLoadedWidget extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('${state.data['fileName']}'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.exit_to_app),
+            onPressed: () => showExitDialog(context),
+          )
+        ],
       ),
       body: Container(
         child: Center(
