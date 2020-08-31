@@ -16,7 +16,7 @@ class WelcomeScreen extends StatelessWidget {
             onPressed: () => Navigator.of(context)
                 .pushReplacementNamed(DocumentPickerScreen.route),
             icon: Icon(Icons.input),
-            label: Text('Нажми меня чтобы перейти к выбору документа')),
+            label: Text('Перейти к выбору документа')),
       ),
     );
   }

@@ -1,3 +1,5 @@
+import 'package:docx_pdf_reader/bloc/document_bloc.dart';
+import 'package:docx_pdf_reader/bloc/picker_bloc.dart';
 import 'package:docx_pdf_reader/screens/document_picker_screen.dart';
 import 'package:docx_pdf_reader/screens/document_view_screen.dart';
 import 'package:docx_pdf_reader/screens/welcome_screen.dart';
@@ -13,7 +15,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // MultiBlocProvider — виджет-обёртка предоставляющий доступ к всем провайдерам из списка providers.
     return MultiBlocProvider(
-      providers: [],
+      providers: [
+        BlocProvider<DocumentBloc>(
+          create: (context) => DocumentBloc(),
+        ),
+        BlocProvider<PickerBloc>(
+          create: (context) => PickerBloc(),
+        )
+      ],
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
@@ -24,6 +33,7 @@ class MyApp extends StatelessWidget {
         initialRoute: WelcomeScreen.route,
         routes: {
           // тут мы присваиваем адресу экрана содержащемуся в константном поле route, функцию возвращающую виджет (желаемый экран)
+          WelcomeScreen.route: (BuildContext context) => WelcomeScreen(),
           DocumentPickerScreen.route: (BuildContext context) =>
               DocumentPickerScreen(),
           DocumentViewScreen.route: (BuildContext context) =>
