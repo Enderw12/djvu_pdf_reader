@@ -17,6 +17,7 @@ class DocumentPickerScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // через объект PickerBloc виджеты могут получить возможность вызывать события (picker_event.dart)
+    // ignore: close_sinks
     final PickerBloc pickerBloc = BlocProvider.of<PickerBloc>(context);
 
     // Scaffold — основной виджет необходимый для нормальной работы.
@@ -92,8 +93,7 @@ class PickerWidget extends StatelessWidget {
                 icon: Icon(Icons.file_copy),
                 label: Text('Выбрать документ')),
           ),
-          Expanded(
-              child: Center(child: Text('Допустимые форматы: doc, docx, pdf'))),
+          Expanded(child: Center(child: Text('Допустимые форматы: djvu, pdf'))),
           ReadButtonWidget(state: state)
         ],
       ),

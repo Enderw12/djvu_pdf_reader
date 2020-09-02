@@ -1,5 +1,5 @@
-import 'package:docx_pdf_reader/bloc/document_bloc.dart';
-import 'package:docx_pdf_reader/widgets/alert_dialog.dart';
+import 'package:djvu_pdf_reader/bloc/document_bloc.dart';
+import 'package:djvu_pdf_reader/widgets/alert_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

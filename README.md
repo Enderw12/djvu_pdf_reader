@@ -1,4 +1,4 @@
-# docx_pdf_reader
+# djvu_pdf_reader
 
 A new Flutter project.
 

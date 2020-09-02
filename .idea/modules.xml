@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/docx_pdf_reader.iml" filepath="$PROJECT_DIR$/docx_pdf_reader.iml" />
-      <module fileurl="file://$PROJECT_DIR$/android/docx_pdf_reader_android.iml" filepath="$PROJECT_DIR$/android/docx_pdf_reader_android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/djvu_pdf_reader.iml" filepath="$PROJECT_DIR$/djvu_pdf_reader.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android/djvu_pdf_reader_android.iml" filepath="$PROJECT_DIR$/android/djvu_pdf_reader_android.iml" />
     </modules>
   </component>
 </project>

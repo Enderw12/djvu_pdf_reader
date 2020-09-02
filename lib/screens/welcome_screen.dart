@@ -1,4 +1,4 @@
-import 'package:docx_pdf_reader/screens/document_picker_screen.dart';
+import 'package:djvu_pdf_reader/screens/document_picker_screen.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -39,7 +39,7 @@ class WelcomeScreen extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    "Приложение для просмотра doc- и pdf-файлов",
+                    "Приложение для просмотра djvu- и pdf-файлов",
                     softWrap: true,
                     maxLines: 2,
                     textAlign: TextAlign.center,
