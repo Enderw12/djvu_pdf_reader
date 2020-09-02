@@ -2,7 +2,10 @@ import 'package:docx_pdf_reader/bloc/document_bloc.dart';
 import 'package:docx_pdf_reader/widgets/alert_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_filereader/flutter_filereader.dart';
+
+import 'package:flutter_full_pdf_viewer/full_pdf_viewer_scaffold.dart';
+
+// import 'package:flutter_filereader/flutter_filereader.dart';
 
 class DocumentViewScreen extends StatelessWidget {
   static const route = '/document_view_screen';
@@ -66,7 +69,7 @@ class DocumentLoadedWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return PDFViewerScaffold(
       appBar: AppBar(
         title: Text('${state.data['fileName']}'),
         actions: [
@@ -76,12 +79,7 @@ class DocumentLoadedWidget extends StatelessWidget {
           )
         ],
       ),
-      body: Container(
-        child: Center(
-            child: FileReaderView(
-          filePath: state.data['filePath'],
-        )),
-      ),
+      path: state.data['filePath'],
     );
   }
 }
