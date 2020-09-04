@@ -5,19 +5,22 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_full_pdf_viewer/full_pdf_viewer_scaffold.dart';
 
-// import 'package:flutter_filereader/flutter_filereader.dart';
 
 class DocumentViewScreen extends StatelessWidget {
+  /// этот виджет не делает ничего кроме отображения документа. Или сообщения об ошибке, в случае если в логике bloc допущена ошибка.
   static const route = '/document_view_screen';
   const DocumentViewScreen({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<DocumentBloc, DocumentState>(
+      // BlocBuilder обеспечивает доступ к состояниям базового класса DocumentState генерируемым объектом класса DocumentBloc 
       builder: (context, state) {
         if (state is DocumentLoaded) {
+          // если состояние "загруженного документа", то отображается виджет способный отобразить его (из пакета flutter_full_pdf_viewer)
           return DocumentLoadedWidget(state: state);
         } else if (state is DocumentLoading) {
+          // если состояние "загрузка" то показываем экран с вращающимся иникатором загрузки 
           return Scaffold(
             appBar: AppBar(
               title: Text('Идёт загрузка...'),
@@ -29,10 +32,12 @@ class DocumentViewScreen extends StatelessWidget {
               ],
             ),
             body: Center(
+              // вращающийся индикатор загрузки
               child: CircularProgressIndicator(),
             ),
           );
         } else {
+          // если предыдущие сценарии не подошли, отображается экран с сообщением об ошибке
           return Scaffold(
             appBar: AppBar(
               title: Text('Ошибка'),
@@ -69,6 +74,7 @@ class DocumentLoadedWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // тот самый виджет способный отображать содержимое PDF-документов
     return PDFViewerScaffold(
       appBar: AppBar(
         title: Text('${state.data['fileName']}'),
