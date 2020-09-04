@@ -111,7 +111,8 @@ class PickerWidget extends StatelessWidget {
 }
 
 class ReadButtonWidget extends StatelessWidget {
-  /// этот виджет отвечает за 
+  /// этот виджет отвечает за открытие экрана "читалки" и передачу ссылки на документ в блок ссылки отвечающий за её состояние. 
+  /// Сам "блок" типа DocumentBloc не несёт в себе какой либо логики, однако само его использование позволяет лёгким движением руки добавлять новые ивенты и состояния
   const ReadButtonWidget({
     Key key,
     @required this.state,
@@ -142,14 +143,17 @@ class ReadButtonWidget extends StatelessWidget {
       );
 
       return FlatButton.icon(
+        // "рисуем" плоскую кнопку с иконкой нажатие на которую создаёт новый ивент для блока просмотра документа
         disabledColor: Colors.grey[200],
         color: Colors.indigoAccent[100],
         highlightColor: Colors.cyanAccent[100],
         onPressed: () {
+          //
           BlocProvider.of<DocumentBloc>(context).add(OpenDocument({
             'filePath': currentState.data['filePath'],
             'fileName': currentState.data['fileName'],
           }));
+          // открывает следующий экран — экран читалки. Который сразу же получит состояние с документом ссылку на который передали предыдущей строкой
           Navigator.of(context).pushNamed(DocumentViewScreen.route);
         },
         icon: Icon(
@@ -162,6 +166,7 @@ class ReadButtonWidget extends StatelessWidget {
       );
     } else {
       return FlatButton.icon(
+        // просто нерабочая кнопка. плейсхолдер в интерфейсе, чтобы пользователь понимал на каком этапе находится.
         disabledColor: Colors.grey[200],
         onPressed: null,
         icon: Icon(
