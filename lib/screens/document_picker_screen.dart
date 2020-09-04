@@ -33,11 +33,12 @@ class DocumentPickerScreen extends StatelessWidget {
           )
         ],
       ),
-      // Container — один из базовых виджетов используемых для разметки (вертски).
-      // Сам по себе невидим и ничего не делает, но позволяет структурировать содержимое на экране и влиять на его характеристики.
-      body: BlocConsumer<PickerBloc, PickerState>(listener: (context, state) {
+      body: BlocConsumer<PickerBloc, PickerState>(
+// BlocConsumer — виджет способный предоставить данные из бизнес-логики которая находится в объекте класса PickerBloc, который производит объекты базового класса PickerState
+        
+        listener: (context, state) {
 // тут выводится сообщение об ошибке.
-// функционал BlocListener гарантирует что это сообщение будет показано максимум единожды на каждое новое состояние
+// функционал listener гарантирует что это сообщение будет показано максимум единожды на каждое новое состояние
         if (state is PickerError)
           return Scaffold.of(context).showSnackBar(SnackBar(
             content: Text(state.message),
@@ -45,7 +46,11 @@ class DocumentPickerScreen extends StatelessWidget {
               milliseconds: 2000,
             ),
           ));
-      }, builder: (context, state) {
+      },
+        // builder — то же что и listener но может быть вызван несколько раз за одно уникальное состояние. 
+        // Не подходит для отрисовки элементов таких как анимированные исчезающие оповещения об ошибке.
+        builder: (context, state) {
+        // тут мы определяем какое именно состояние вернула нам бизнес логика, используем полученные данные для отрисовки соответствующего состояния экрана.
         if (state is PickerInitial) {
           return PickerWidget(pickerBloc: pickerBloc, state: state);
         }
@@ -56,7 +61,7 @@ class DocumentPickerScreen extends StatelessWidget {
         } else if (state is PickerLoaded) {
           return PickerWidget(pickerBloc: pickerBloc, state: state);
         } else {
-          // в случае ошибки PickerError показать интерфейс для выбора другого файла
+          // в случае ошибки — состояние PickerError, показывает интерфейс для выбора другого файла. 
           return PickerWidget(
             pickerBloc: pickerBloc,
             state: state,
@@ -67,7 +72,9 @@ class DocumentPickerScreen extends StatelessWidget {
   }
 }
 
+
 class PickerWidget extends StatelessWidget {
+  /// Этот виджет отвечает за интерфейс выбора файла
   const PickerWidget({
     Key key,
     @required this.pickerBloc,
@@ -89,6 +96,8 @@ class PickerWidget extends StatelessWidget {
           Center(
             child: FlatButton.icon(
                 color: Colors.indigoAccent[100],
+              /// обращаясь к объекту класса PickerBloc, мы можем передать в наш bloc объект являющийся "ивентом"
+              /// событием которое должно быть обработано именно на основе него генерируется новое состояние.
                 onPressed: () => pickerBloc.add(PickDocument()),
                 icon: Icon(Icons.file_copy),
                 label: Text('Выбрать документ')),
@@ -102,6 +111,7 @@ class PickerWidget extends StatelessWidget {
 }
 
 class ReadButtonWidget extends StatelessWidget {
+  /// этот виджет отвечает за 
   const ReadButtonWidget({
     Key key,
     @required this.state,
